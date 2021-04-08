@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MT29F2G08ABAEA.Properties {
+namespace MT29F16GA08ABABA3W.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
