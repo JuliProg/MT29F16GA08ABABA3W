@@ -29,13 +29,13 @@ Dependency injection, DI based on MEF framework is used to connect the chip to t
         {
             myChip.devManuf = "Micron";
             myChip.name = "MT29F16GA08ABABA3W";
-            myChip.chipID = "2CDA909506";      // device ID - 2Ch DAh 90h 95h 06h 
+            myChip.chipID = "2C48002689000000";      // device ID - 2Ch 48h 00h 26h 89h 00h 00h 00h 
 
             myChip.width = Organization.x8;    // chip width - 8 bit
-            myChip.bytesPP = 2048;             // page size - 2048 byte (2Kb)
-            myChip.spareBytesPP = 64;          // size Spare Area - 64 byte
-            myChip.pagesPB = 64;               // the number of pages per block - 64 
-            myChip.bloksPLUN = 2048;           // number of blocks in CE - 2048
+            myChip.bytesPP = 4096;             // page size - 4096  byte (4Kb)
+            myChip.spareBytesPP = 224;          // size Spare Area - 224 byte
+            myChip.pagesPB = 128;               // the number of pages per block - 128 
+            myChip.bloksPLUN = 4096;           // number of blocks in CE - 4096 
             myChip.LUNs = 1;                   // the amount of CE in the chip
             myChip.colAdrCycles = 2;           // cycles for column addressing
             myChip.rowAdrCycles = 3;           // cycles for row addressing 
@@ -71,15 +71,15 @@ Dependency injection, DI based on MEF framework is used to connect the chip to t
 
             myChip.registers.Add(                  // https://github.com/JuliProg/Wiki/wiki/ID-Register
                 "Id Register").
-                Size(5).
+                Size(8).
                 Operations("ReadId_90h");
             //Interpretation(ID_interpreting);
 
             myChip.registers.Add(                  // https://github.com/JuliProg/Wiki/wiki/OTP
                 "OTP memory area").
-                Size(63360).
-                Operations("OTP_Mode_On_v1").
-                Operations("OTP_Mode_Off_v1");
+                Size((4096+224)*128).
+                Operations("OTP_Mode_On_v1").      // set chip to OTP mode then Read or Programm block[0]
+                Operations("OTP_Mode_Off_v1");     // set chip to normall mode
 
 
             myChip.registers.Add(
@@ -102,6 +102,7 @@ Dependency injection, DI based on MEF framework is used to connect the chip to t
         
 ```
 </section>
+
 
 
 
